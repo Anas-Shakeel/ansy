@@ -1,3 +1,5 @@
+![welcome to ansy](https://github.com/user-attachments/assets/fe688f55-799e-4781-836d-377520c735b0)
+
 # Ansy 🥱
 
 `ansy` (pronounced __ANSI__), inspired by (& successor to) `termcolor` module that is used to style and format output in the terminal.
