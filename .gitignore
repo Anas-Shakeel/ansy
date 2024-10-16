@@ -1,3 +1,6 @@
+/__pycache__/
+/.pytest_cache/
+ansy/__pycache__/
 /build/
 /dist/
 /ansy-egg-info/
