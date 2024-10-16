@@ -7,10 +7,14 @@ from pytest import raises
 
 
 def test_colored_basic():
+    assert ansy.colored(None, 'blue', force_color=True) == ''
+    assert ansy.colored("", 'blue', force_color=True) == ''
+    assert ansy.colored(False, 'blue', force_color=True) == ''
+
     s = "This is string."
     # 4Bit
-    assert ansy.colored(
-        s, 'blue', force_color=True) == '\x1b[34mThis is string.\x1b[0m'
+    assert ansy.colored(s, 'blue',
+                        force_color=True) == '\x1b[34mThis is string.\x1b[0m'
     assert ansy.colored(s, 'blue', 'dark_grey',
                         force_color=True) == '\x1b[100m\x1b[34mThis is string.\x1b[0m'
 
@@ -192,6 +196,25 @@ def test_de_ansi():
 
     with raises(TypeError):
         ansy.de_ansi(None)
+
+
+def test_contains_ansi():
+    dummy = "dummy string"
+    assert not ansy.contains_ansi(ansy.colored(None))
+    assert not ansy.contains_ansi(ansy.colored(""))
+    assert not ansy.contains_ansi(ansy.colored(dummy))
+
+    assert ansy.contains_ansi(ansy.colored(dummy, "red", "dark_grey", 
+                                           ['bold', 'underline'], force_color=True))
+    assert ansy.contains_ansi(ansy.colored(dummy, "brown_sandy", "dark_grey", 
+                                           ['bold', 'underline'], 8, force_color=True))
+    assert ansy.contains_ansi(ansy.colored(dummy, "#B00B1E", "#C0DDE5",
+                                           ['bold', 'underline'], 24, force_color=True))
+
+    with raises(TypeError):
+        ansy.contains_ansi(None)
+    with raises(TypeError):
+        ansy.contains_ansi(123)
 
 
 def test_make_gradient():
@@ -381,3 +404,6 @@ def test_is_valid_color():
     ]
     for v in invalids:
         assert ansy.is_valid_color(*v) == False
+
+if __name__ == "__main__":
+    test_contains_ansi()
