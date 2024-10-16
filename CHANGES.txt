@@ -1,0 +1,6 @@
+1.0.2 -- October 17, 2024
+
+* Proper Attributions added in THIRD_PARTY_LICENSES
+* Improved CLI
+* Added contains_ansi()
+* Minor bugs fixed
