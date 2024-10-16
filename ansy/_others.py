@@ -634,9 +634,8 @@ Color256 = Literal[
     'grey_24'
 ]
 
-
 # Color mode
-ColorMode = Literal[4, 8, 24]
+ColorMode = int | Literal[4, 8, 24]
 
 # Master Color Type
-Color = StandardColor | Color256 | RGBTuple
+Color = str | StandardColor | Color256 | RGBTuple

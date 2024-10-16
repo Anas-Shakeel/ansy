@@ -1,5 +1,6 @@
 # Copyright (c) 2024 Anas Shakeel
 
+from __future__ import annotations
 from sys import stdout
 from os import isatty, environ
 from re import IGNORECASE, compile as re_compile
@@ -28,6 +29,8 @@ ANSY_STR_REGEX = re_compile(r"(@(?:\w|\d)+\[.*?\])", IGNORECASE)
 ANSY_STR_CAPT_REGEX = re_compile(r"@((?:\w|\d)+)\[(.*?)\]", IGNORECASE)
 
 
+# This function is borrowed from 'termcolor' library. licensed under the MIT License.
+# Full license text can be found in the THIRD_PARTY_LICENSE file.
 def _can_do_colour(*, no_color: bool | None = None,
                    force_color: bool | None = None) -> bool:
     """
@@ -41,19 +44,6 @@ def _can_do_colour(*, no_color: bool | None = None,
 
     https://no-color.org
     """
-
-    # Copyright (c) 2008-2011 Volvox Development Team
-    #
-    # Permission is hereby granted, free of charge, to any person obtaining a copy
-    # of this software and associated documentation files (the "Software"), to deal
-    # in the Software without restriction, including without limitation the rights
-    # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    # copies of the Software, and to permit persons to whom the Software is
-    # furnished to do so, subject to the following conditions:
-    #
-    # The above copyright notice and this permission notice shall be included in
-    # all copies or substantial portions of the Software.
-
     if no_color is not None and no_color:
         return False
     if force_color is not None and force_color:
@@ -133,9 +123,10 @@ def colored(text: str, fgcolor: Color = None, bgcolor: Color = None,
     - `attrs` contains an invalid attribute
 
     """
+    if not text:
+        return ""
+
     result = str(text)
-    if result == "":
-        return result
     
     if not _can_do_colour(no_color=no_color, force_color=force_color):
         return result
@@ -656,6 +647,24 @@ def de_ansi(text: str) -> str:
 
     # Recognize all ANSI Patterns in a string
     return ANSI_REGEX.sub("", text)
+
+
+def contains_ansi(text:str) -> bool:
+    """ 
+    ### Contains ansi
+    Returns `True` if text contains ansi codes, else `False`.
+    
+    #### Example:
+    ```
+    >> text = colored("Formatted String", fgcolor="red")
+    >> contains_ansi(text)
+    True
+    >> text = de_ansi(text)
+    >> contains_ansi(text)
+    False
+    ```
+    """
+    return True if ANSI_REGEX.search(text) else False
 
 
 def print_all_colors():

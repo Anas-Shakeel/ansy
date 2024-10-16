@@ -1,12 +1,7 @@
 # Corpora (v0.0.1) by Darius Kazemi
 # https://github.com/dariusk/corpora
 
-# These colors are taken from the corpora.
-# It's safe to use them for personal or commercial purposes as suggested in the README.md
-# file of the corpora as Darius Kazemi has waived all copyright and related or neighboring
-# rights to Corpora. It has a CC0 License which permits us to use it however we want!
-# Thank you Darius (and other contributors), for your efforts.
-
+# These colors are taken from the corpora. See full license text in THIRD_PARTY_LICENSES file.
 
 from __future__ import annotations
 from typing import Literal
