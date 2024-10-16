@@ -1022,9 +1022,11 @@ These below are the shades of each Material color.
 
 Thank you all, for saving me from the frustration i had to go through if........
 
-### ▎ Bugs and reports
+### ▎ Compatibility and Testing
 
-I tested it as well as i could but there still might be a slight chance for a bug to occur. Feel free to report bugs or suggest improvements.
+This package has been well-tested across multiple platforms, including **Windows**, **macOS**, and **Linux** _(ubuntu)_, ensuring broad compatibility.
+
+It is tested on Python versions `3.9` upto `3.12`. it may or may not work on other versions.
 
 ---
 
