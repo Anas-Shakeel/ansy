@@ -13,7 +13,7 @@ with open(path.join(cwd, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ansy',
-    version='1.0.1',
+    version='1.0.2',
     description='A Python package to colorize and format output in the terminal.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -23,4 +23,4 @@ setup(
     packages=['ansy'],
     include_package_data=True,
     install_requires=[],
-    entry_points={"console_scripts": ['ansy=ansy.cli:welcome']})
+    entry_points={"console_scripts": ['ansy=ansy.cli:main']})
