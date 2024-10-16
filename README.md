@@ -1,5 +1,3 @@
-![welcome to ansy](https://github.com/user-attachments/assets/fe688f55-799e-4781-836d-377520c735b0)
-
 # Ansy 🥱
 
 `ansy` (pronounced __ANSI__), inspired by (& successor to) `termcolor` module that is used to style and format output in the terminal.
@@ -621,6 +619,18 @@ Returns the color name for the `code`. Returns `None` if `code` is not a valid c
 > 
 > Color `name` or `None`
 
+`contains_ansi(text)`
+
+Returns `True` if `text` contains Ansi codes, else `False`.
+
+> ##### Parameters:
+> 
+> - `text`: the text string to check
+> 
+> ##### Returns:
+> 
+> bool
+
 `create_style(color_mode=4, fgcolor=None, bgcolor=None, attrs=None)`
 
 Creates a style `dict` to use in `colored_ansy()` as style.
@@ -1004,11 +1014,11 @@ These below are the shades of each Material color.
 
 ### ▎ Attributions
 
-- `_can_do_colour()` (_which checks environment variables for tty/dumb terminals_) is borrowed from `termcolor`.
+- `_can_do_colour()` (_which checks environment variables for tty/dumb terminals_) is borrowed from `termcolor`. see full license text in `THIRD_PARTY_LICENSES` file.
 
 - `8-bit` colors have been assigned X-Term names using **256-colors-cheatsheet** from [**ditig.com**](https://www.ditig.com/publications/256-colors-cheat-sheet) *(Updated and cleaned)*
 
-- `colors` module uses **1400+** colors that are taken from the [Corpora](https://github.com/dariusk/corpora) by Darius Kazemi. *Corpora* has a **CC0** license but still, attributions are always sweet.
+- `colors` module uses **1400+** colors that are taken from the [Corpora](https://github.com/dariusk/corpora) by Darius Kazemi.
 
 Thank you all, for saving me from the frustration i had to go through if........
 
