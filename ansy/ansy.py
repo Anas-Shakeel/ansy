@@ -6,7 +6,7 @@ from os import isatty, environ
 from re import IGNORECASE, compile as re_compile
 from io import UnsupportedOperation
 from random import choice, randint
-from typing import Literal, Iterable
+from typing import Literal, Iterable, Union
 
 from ._others import (
     StandardColor, Attribute, Color256, RGBTuple, Color, ColorMode, Quality,
@@ -31,8 +31,8 @@ ANSY_STR_CAPT_REGEX = re_compile(r"@((?:\w|\d)+)\[(.*?)\]", IGNORECASE)
 
 # This function is borrowed from 'termcolor' library. licensed under the MIT License.
 # Full license text can be found in the THIRD_PARTY_LICENSE file.
-def _can_do_colour(*, no_color: bool | None = None,
-                   force_color: bool | None = None) -> bool:
+def _can_do_colour(*, no_color: bool = None,
+                   force_color: bool = None) -> bool:
     """
     Check env vars and for tty/dumb terminal.
 
@@ -308,8 +308,8 @@ def create_style(color_mode: int = 4, fgcolor: Color = None,
             "attrs": attrs}
 
 
-def colored_gradient(text: str, start_color: RGBTuple | str,
-                     end_color: RGBTuple | str, quality: Quality = 'medium',
+def colored_gradient(text: str, start_color: Union[RGBTuple, str],
+                     end_color: Union[RGBTuple, str], quality: Quality = 'medium',
                      reverse: bool = False) -> str:
     """ 
     ### Colored Gradient (24-bit)
@@ -566,7 +566,7 @@ def _apply_random_colors(text: str, color_mode: ColorMode, custom_palette: Itera
     return colored(text, color, color_mode=color_mode, attrs=new_attrs)
 
 
-def get_random_color(color_mode: int = 4) -> str | RGBTuple:
+def get_random_color(color_mode: int = 4) -> Union[str, RGBTuple]:
     """ 
     ### Get Random Color
     Returns a random color from a colorsystem specified by `color_mode`.
@@ -892,7 +892,7 @@ def _is_valid_colormode(color_mode: ColorMode) -> bool:
     return False
 
 
-def _is_color_8bit(color: int | str) -> bool:
+def _is_color_8bit(color: Union[int, str]) -> bool:
     """
     Returns `True` if `clr` is a recognized color, else `False`.
 
@@ -1005,7 +1005,7 @@ def is_valid_attr(attr: str) -> bool:
     return False
 
 
-def colorname_to_code(color: Color256) -> int | None:
+def colorname_to_code(color: Color256) -> Union[int, None]:
     """ 
     ### Colorname to Code
     Returns the `code` for the `color`.
@@ -1036,7 +1036,7 @@ def colorname_to_code(color: Color256) -> int | None:
     return COLORS_256.get(color, color)
 
 
-def code_to_colorname(color: int) -> str | None:
+def code_to_colorname(color: int) -> Union[str, None]:
     """ 
     ### Code to Colorname
     Returns the color name for the `color` code.

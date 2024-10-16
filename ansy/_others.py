@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Tuple
+from typing import Literal, Tuple, Union
 
 
 # ANSI Format strings
@@ -635,7 +635,7 @@ Color256 = Literal[
 ]
 
 # Color mode
-ColorMode = int | Literal[4, 8, 24]
+ColorMode = Union[int, Literal[4, 8, 24]]
 
 # Master Color Type
-Color = str | StandardColor | Color256 | RGBTuple
+Color = Union[str, StandardColor, Color256, RGBTuple]
