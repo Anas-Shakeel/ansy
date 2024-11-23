@@ -29,7 +29,7 @@ def get_args():
     parser = ArgumentParser(
         usage="ansy [OPTIONS]",
         description="Command-line utility to color text.",
-        epilog="ansy v1.0.2",
+        epilog="ansy v1.1.1",
     )
 
     parser.add_argument(
