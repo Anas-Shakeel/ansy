@@ -2,7 +2,7 @@ __pycache__/
 /.pytest_cache/
 /build/
 /dist/
-/ansy-egg-info/
+/ansy.egg-info/
 .venv/
 /examples/
 /MANIFEST.in
