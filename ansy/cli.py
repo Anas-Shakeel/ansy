@@ -26,13 +26,29 @@ def main():
 
 
 def get_args():
-    parser = ArgumentParser(usage="ansy [OPTIONS]",
-                            description="Command-line utility to color text.")
+    parser = ArgumentParser(
+        usage="ansy [OPTIONS]",
+        description="Command-line utility to color text.",
+        epilog="ansy v1.0.2",
+    )
 
-    parser.add_argument("-t", "--text", help="the text to color", metavar="", default="Welcome to ansy.")
-    parser.add_argument("-fg", "--fgcolor", help="the foreground color of text", metavar="")
-    parser.add_argument("-bg", "--bgcolor", help="the background color of text", metavar="")
-    parser.add_argument("-m", "--mode", help="the color mode (4, 8, or 24)", metavar="", type=int, default=4)
+    parser.add_argument(
+        "-t", "--text", help="the text to color", metavar="", default="Welcome to ansy."
+    )
+    parser.add_argument(
+        "-fg", "--fgcolor", help="the foreground color of text", metavar=""
+    )
+    parser.add_argument(
+        "-bg", "--bgcolor", help="the background color of text", metavar=""
+    )
+    parser.add_argument(
+        "-m",
+        "--mode",
+        help="the color mode (4, 8, or 24)",
+        metavar="",
+        type=int,
+        default=4,
+    )
 
     # Parse and return Args
     return parser.parse_args()

@@ -2,7 +2,7 @@
 
 
 class StyleError(Exception):
-    """ Invalid style for `Ansy strings` """
+    """Invalid style for `Ansy strings`"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
@@ -10,7 +10,7 @@ class StyleError(Exception):
 
 
 class ColorModeError(Exception):
-    """ Inappropriate color mode that is unrecognized by `Ansy` """
+    """Inappropriate color mode that is unrecognized by `Ansy`"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
@@ -18,7 +18,7 @@ class ColorModeError(Exception):
 
 
 class InvalidColorError(Exception):
-    """ Inappropriate color that is unrecognized by `Ansy` """
+    """Inappropriate color that is unrecognized by `Ansy`"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
@@ -26,7 +26,7 @@ class InvalidColorError(Exception):
 
 
 class RGBError(InvalidColorError):
-    """ Invalid RGB """
+    """Invalid RGB"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
@@ -34,7 +34,7 @@ class RGBError(InvalidColorError):
 
 
 class HexError(InvalidColorError):
-    """ Invalid Hex color code """
+    """Invalid Hex color code"""
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)

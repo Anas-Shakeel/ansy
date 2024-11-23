@@ -11,8 +11,9 @@ from . import _corpus_colors
 from random import choice
 from typing import List, Dict
 
+
 def get_web_colors():
-    """ 
+    """
     ### Get Web Colors
     Yields Web/HTML colors in `dict`.
     ```
@@ -28,7 +29,7 @@ def get_web_colors():
 
 
 def get_palettes():
-    """ 
+    """
     ### Get Palettes
     Yields a palette per `list`.
     ```
@@ -47,7 +48,7 @@ def get_palettes():
 
 
 def get_random_palette() -> List[str]:
-    """ 
+    """
     ### Get Random Palette
     Returns a random color palette.
     """
@@ -55,16 +56,16 @@ def get_random_palette() -> List[str]:
 
 
 def get_material_color(color: _corpus_colors.MaterialColor) -> Dict:
-    """ 
+    """
     ### Get Material Colors
     Returns a `dict` of a material `color` (all of its shades).
 
     #### Material Colors:
     Google's Material Colors include `red`, `pink`, `purple`, `deeppurple`, `indigo`,
-    `blue`, `lightblue`, `cyan`, `teal`, `green`, `lightgreen`, `lime`, `yellow`, 
+    `blue`, `lightblue`, `cyan`, `teal`, `green`, `lightgreen`, `lime`, `yellow`,
     `amber`, `orange`, `deeporange`, `brown`, `grey`, `bluegrey`.
 
-    Shades of each color: `50`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, 
+    Shades of each color: `50`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`,
     `900`, `a100`, `a200`, `a400`, `a700`.
     ```
     #### dict Structure:

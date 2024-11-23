@@ -9,20 +9,34 @@ from random import choice, randint
 from typing import Literal, Iterable, Union
 
 from ._others import (
-    StandardColor, Attribute, Color256, RGBTuple, Color, ColorMode, Quality,
-    BGCOLORS_STANDARD, FGCOLORS_STANDARD, ATTRIBUTES,
-    COLORS256_COLORNAMES, STANDARD_COLORNAMES,
-    ANSI_CODES, COLORS_256,
+    StandardColor,
+    Attribute,
+    Color256,
+    RGBTuple,
+    Color,
+    ColorMode,
+    Quality,
+    BGCOLORS_STANDARD,
+    FGCOLORS_STANDARD,
+    ATTRIBUTES,
+    COLORS256_COLORNAMES,
+    STANDARD_COLORNAMES,
+    ANSI_CODES,
+    COLORS_256,
 )
 from .exceptions import (
-    InvalidColorError, RGBError, HexError,
-    StyleError, ColorModeError
+    InvalidColorError,
+    RGBError,
+    HexError,
+    StyleError,
+    ColorModeError,
 )
 
 
 # Compiled REGEX Patterns
 ANSI_REGEX = re_compile(
-    r"[\u001B\u009B][\[\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\d\/#&.:=?%@~_]+)*|[a-zA-Z\d]+(?:;[-a-zA-Z\d\/#&.:=?%@~_]*)*)?\u0007)|(?:(?:\d{1,4}(?:;\d{0,4})*)?[\dA-PR-TZcf-nq-uy=><~]))")
+    r"[\u001B\u009B][\[\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\d\/#&.:=?%@~_]+)*|[a-zA-Z\d]+(?:;[-a-zA-Z\d\/#&.:=?%@~_]*)*)?\u0007)|(?:(?:\d{1,4}(?:;\d{0,4})*)?[\dA-PR-TZcf-nq-uy=><~]))"
+)
 HEX_REGEX = re_compile(r"^#?((?:[0-9a-fA-F]{3}){1,2})$", IGNORECASE)
 ANSY_STR_REGEX = re_compile(r"(@(?:\w|\d)+\[.*?\])", IGNORECASE)
 # ANSY_STR_REGEX with capturing groups
@@ -31,8 +45,7 @@ ANSY_STR_CAPT_REGEX = re_compile(r"@((?:\w|\d)+)\[(.*?)\]", IGNORECASE)
 
 # This function is borrowed from 'termcolor' library. licensed under the MIT License.
 # Full license text can be found in the THIRD_PARTY_LICENSE file.
-def _can_do_colour(*, no_color: bool = None,
-                   force_color: bool = None) -> bool:
+def _can_do_colour(*, no_color: bool = None, force_color: bool = None) -> bool:
     """
     Check env vars and for tty/dumb terminal.
 
@@ -69,10 +82,17 @@ def _can_do_colour(*, no_color: bool = None,
         return stdout.isatty()
 
 
-def colored(text: str, fgcolor: Color = None, bgcolor: Color = None,
-            attrs: Attribute = None, color_mode: int = 4,
-            *, no_color: bool = None, force_color: bool = None) -> str:
-    """ 
+def colored(
+    text: str,
+    fgcolor: Color = None,
+    bgcolor: Color = None,
+    attrs: Attribute = None,
+    color_mode: int = 4,
+    *,
+    no_color: bool = None,
+    force_color: bool = None,
+) -> str:
+    """
     ### Colored
     Colorize text using `4`, `8`, or `24` bit colors. If `fgcolor`, `bgcolor`, and `attrs` all are `None`,
     the `text` itself is returned without any ansi codes added.
@@ -127,7 +147,7 @@ def colored(text: str, fgcolor: Color = None, bgcolor: Color = None,
         return ""
 
     result = str(text)
-    
+
     if not _can_do_colour(no_color=no_color, force_color=force_color):
         return result
 
@@ -135,14 +155,24 @@ def colored(text: str, fgcolor: Color = None, bgcolor: Color = None,
     if fgcolor == None and bgcolor == None and attrs == None:
         return result
 
-    return make_ansi(fgcolor, bgcolor, attrs, color_mode) + result + ANSI_CODES['reset']
+    return make_ansi(fgcolor, bgcolor, attrs, color_mode) + result + ANSI_CODES["reset"]
 
 
-def printc(text: str, fgcolor: Color = None, bgcolor: Color = None,
-           attrs: Attribute = None, color_mode: int = 4,
-           *, sep=" ", end="\n", file=None, flush=False,
-           no_color: bool = None, force_color: bool = None):
-    """ 
+def printc(
+    text: str,
+    fgcolor: Color = None,
+    bgcolor: Color = None,
+    attrs: Attribute = None,
+    color_mode: int = 4,
+    *,
+    sep=" ",
+    end="\n",
+    file=None,
+    flush=False,
+    no_color: bool = None,
+    force_color: bool = None,
+):
+    """
     ### Print Colored
     Prints whatever returns from `ansy.colored`.
 
@@ -151,14 +181,27 @@ def printc(text: str, fgcolor: Color = None, bgcolor: Color = None,
     >> ansy.printc('Print this.', 'light_red', attrs=['bold'])
     ```
     """
-    print(colored(text, fgcolor, bgcolor, attrs, color_mode,
-                  no_color=no_color, force_color=force_color),
-          sep=sep, end=end, file=file, flush=flush)
+    print(
+        colored(
+            text,
+            fgcolor,
+            bgcolor,
+            attrs,
+            color_mode,
+            no_color=no_color,
+            force_color=force_color,
+        ),
+        sep=sep,
+        end=end,
+        file=file,
+        flush=flush,
+    )
 
 
-def colored_ansy(text: str, style: dict,
-                 *, no_color: bool = None, force_color: bool = None) -> str:
-    """ 
+def colored_ansy(
+    text: str, style: dict, *, no_color: bool = None, force_color: bool = None
+) -> str:
+    """
     ### Colored Ansy
     Adds the styling defined in `style` to wherever an `ansy string`
     is found in the `text`.
@@ -170,8 +213,8 @@ def colored_ansy(text: str, style: dict,
     ##### Style dict:
     `style` is a dictionary that defines the styles to apply to these
     `ansy_strings`. Each style in the `style` dictionary is itself a dictionary.
-    Purpose of this structure is so that you could define all your styles in one 
-    dictionary and then use it everywhere, instead of creating a dictioanry for 
+    Purpose of this structure is so that you could define all your styles in one
+    dictionary and then use it everywhere, instead of creating a dictioanry for
     each style and create a mess in your code.
 
     ```
@@ -184,10 +227,10 @@ def colored_ansy(text: str, style: dict,
     ..         "attrs": ["bold", "reverse"]
     ..     }
     .. }
-    >> 
+    >>
     >> # Style can also be created by create_style()
     >> style['new_style'] = ansy.create_style(24, 'fff', (200,0,0), attrs=['bold'])
-    >> 
+    >>
     >> ansy.colored_ansy("This is an @new_style[ansy string]", style)
     'This is an ansy string'
     >> # above string is formatted as defined by "new_style"
@@ -207,17 +250,19 @@ def colored_ansy(text: str, style: dict,
     if not matches:
         return None
 
-    parsed = ['']*len(matches)
+    parsed = [""] * len(matches)
     for index, m in enumerate(matches):
         # Parse, format and add into the parsed:list
         parsed[index] = _parse_ansy(
-            m, style, no_color=no_color, force_color=force_color)
+            m, style, no_color=no_color, force_color=force_color
+        )
 
     return "".join(parsed)
 
 
-def _parse_ansy(ansy: str, style: dict,
-                *, no_color: bool = None, force_color: bool = None) -> str:
+def _parse_ansy(
+    ansy: str, style: dict, *, no_color: bool = None, force_color: bool = None
+) -> str:
     """
     Parse `ansy` string and return the formatted ansy.
 
@@ -235,22 +280,31 @@ def _parse_ansy(ansy: str, style: dict,
         current_style: dict = style[ansy_matches.group(1)]
 
         # Colorize the ansy strings
-        return colored(ansy_matches.group(2), current_style['fgcolor'],
-                       current_style['bgcolor'], current_style['attrs'],
-                       current_style['color_mode'], no_color=no_color,
-                       force_color=force_color)
+        return colored(
+            ansy_matches.group(2),
+            current_style["fgcolor"],
+            current_style["bgcolor"],
+            current_style["attrs"],
+            current_style["color_mode"],
+            no_color=no_color,
+            force_color=force_color,
+        )
 
     # Returns the string if not ansy
     return ansy
 
 
-def create_style(color_mode: int = 4, fgcolor: Color = None,
-                 bgcolor: Color = None, attrs: Iterable[Attribute] = None) -> dict:
-    """ 
+def create_style(
+    color_mode: int = 4,
+    fgcolor: Color = None,
+    bgcolor: Color = None,
+    attrs: Iterable[Attribute] = None,
+) -> dict:
+    """
     ### Create Style
     Creates a style `dict` to use in `colored_ansy()` as style.
 
-    Sole purpose of this function is to make the process creating a style easier 
+    Sole purpose of this function is to make the process creating a style easier
     and safer. it validates the `fgcolor`, `bgcolor` and `attrs` to make
     sure they are valid.
 
@@ -302,16 +356,22 @@ def create_style(color_mode: int = 4, fgcolor: Color = None,
     attrs = _validate_attrs(attrs)
 
     # Create the dictionary
-    return {"color_mode": color_mode,
-            "fgcolor": fgcolor,
-            "bgcolor": bgcolor,
-            "attrs": attrs}
+    return {
+        "color_mode": color_mode,
+        "fgcolor": fgcolor,
+        "bgcolor": bgcolor,
+        "attrs": attrs,
+    }
 
 
-def colored_gradient(text: str, start_color: Union[RGBTuple, str],
-                     end_color: Union[RGBTuple, str], quality: Quality = 'medium',
-                     reverse: bool = False) -> str:
-    """ 
+def colored_gradient(
+    text: str,
+    start_color: Union[RGBTuple, str],
+    end_color: Union[RGBTuple, str],
+    quality: Quality = "medium",
+    reverse: bool = False,
+) -> str:
+    """
     ### Colored Gradient (24-bit)
     Apply horizontal gradient on `text`.
 
@@ -344,31 +404,30 @@ def colored_gradient(text: str, start_color: Union[RGBTuple, str],
     """
     if not text:
         return ""
-    
-    assert start_color != None or end_color != None, \
-        "start_color and end_color must not be None"
+
+    assert (
+        start_color != None or end_color != None
+    ), "start_color and end_color must not be None"
 
     # Colors Validation
     start_color, end_color = _validate_colors((start_color, end_color), 24)
 
     # Convert to RGBs, if Hexcodes
-    start_color = start_color if is_valid_rgb(
-        start_color) else hex_to_rgb(start_color)
+    start_color = start_color if is_valid_rgb(start_color) else hex_to_rgb(start_color)
     end_color = end_color if is_valid_rgb(end_color) else hex_to_rgb(end_color)
 
-    assert quality in ('high', 'medium', 'low')
+    assert quality in ("high", "medium", "low")
 
     # Length of text
     text_length = len(text)
 
     # Create the gradient (Generator not actual values)
-    gradient = make_gradient(start_color, end_color,
-                             text_length, reverse=reverse)
+    gradient = make_gradient(start_color, end_color, text_length, reverse=reverse)
 
     batch_size = 1
-    if quality == 'low':
+    if quality == "low":
         batch_size = len(text) // 4
-    elif quality == 'medium':
+    elif quality == "medium":
         batch_size = len(text) // 8
     else:
         # High quality, already set
@@ -383,9 +442,9 @@ def colored_gradient(text: str, start_color: Union[RGBTuple, str],
 
 
 def _apply_gradient(text: str, gradient: list, batch_size: int) -> str:
-    """ Apply `gradient` to `text` """
-    fmt_str = ANSI_CODES['24bit']
-    gradient_text = ''
+    """Apply `gradient` to `text`"""
+    fmt_str = ANSI_CODES["24bit"]
+    gradient_text = ""
     read_chars = 0
     batch = []
 
@@ -396,20 +455,21 @@ def _apply_gradient(text: str, gradient: list, batch_size: int) -> str:
 
         # Is batch full?
         if len(batch) == batch_size:
-            gradient_text += fmt_str % (38, *color, ''.join(batch))
+            gradient_text += fmt_str % (38, *color, "".join(batch))
             batch = []  # Start new batch
             continue
 
         # Is this last batch?
         if read_chars >= len(text):
-            gradient_text += fmt_str % (38, *color, ''.join(batch))
+            gradient_text += fmt_str % (38, *color, "".join(batch))
 
-    return gradient_text + ANSI_CODES['reset']
+    return gradient_text + ANSI_CODES["reset"]
 
 
-def make_gradient(start_color: RGBTuple, end_color: RGBTuple,
-                  steps: int = 10, reverse: bool = False):
-    """ 
+def make_gradient(
+    start_color: RGBTuple, end_color: RGBTuple, steps: int = 10, reverse: bool = False
+):
+    """
     ### Make Gradient (24-bit)
     Make a gradient between two RGB colors `start_color` and `end_color` by
     linearly interpolating between these colors for a given number of `steps`.
@@ -426,10 +486,10 @@ def make_gradient(start_color: RGBTuple, end_color: RGBTuple,
     >> start_color = (240, 194, 123)
     >> end_color = (255, 85, 85)
     >> gradient = ansy.make_gradient(start_color, end_color, steps=4)
-    >> 
+    >>
     >> gradient
     <generator object make_gradient at 0x0000018F0B580700>
-    >> 
+    >>
     >> list(gradient)
     [(240, 194, 123), (245, 157, 110), (250, 121, 97), (255, 85, 85)]
     ```
@@ -453,20 +513,22 @@ def make_gradient(start_color: RGBTuple, end_color: RGBTuple,
 
     # Generate the gradient colors
     for step in range(steps):
-        r = int(start_color[0] + (end_color[0] -
-                start_color[0]) * (step/(steps-1)))
-        g = int(start_color[1] + (end_color[1] -
-                start_color[1]) * (step/(steps-1)))
-        b = int(start_color[2] + (end_color[2] -
-                start_color[2]) * (step/(steps-1)))
+        r = int(start_color[0] + (end_color[0] - start_color[0]) * (step / (steps - 1)))
+        g = int(start_color[1] + (end_color[1] - start_color[1]) * (step / (steps - 1)))
+        b = int(start_color[2] + (end_color[2] - start_color[2]) * (step / (steps - 1)))
 
         yield (r, g, b)
 
 
-def colored_random(text: str, target: Literal['all', 'words', 'chars'] = 'all',
-                   color_mode: int = 4, custom_palette: Iterable = None,
-                   attrs: Iterable[Attribute] = None, random_attrs: bool = False) -> str:
-    """ 
+def colored_random(
+    text: str,
+    target: Literal["all", "words", "chars"] = "all",
+    color_mode: int = 4,
+    custom_palette: Iterable = None,
+    attrs: Iterable[Attribute] = None,
+    random_attrs: bool = False,
+) -> str:
+    """
     ### Colored Random
     Apply a random color to `text`. colors are chosen from a colorsystem specified by `color_mode`.
 
@@ -495,13 +557,13 @@ def colored_random(text: str, target: Literal['all', 'words', 'chars'] = 'all',
     >> # Not recommended to use 'chars' with 24bit colors, if string is longer than 50 characters
     >> ansy.colored_random(text, 'chars', 24)
     'This is just a string.'
-    >> 
+    >>
     >> # Why not you might ask! let me show you
     >> f = ansy.colored_random('This', 'chars', 24)
     >> print([f])
     ['\x1b[38;2;5;155;190mT\x1b[0m\x1b[38;2;119;11;99mh\x1b[0m\x1b[38;2;24;50;220mi\x1b[0m\x1b[38;2;178;45;244ms\x1b[0m']
     >>
-    >> # for a string of 4 characters, it outputs 113 characters! and for what? just to see some random colors in the terminal? 
+    >> # for a string of 4 characters, it outputs 113 characters! and for what? just to see some random colors in the terminal?
     ```
 
     Raises `ValueError` if:
@@ -518,7 +580,7 @@ def colored_random(text: str, target: Literal['all', 'words', 'chars'] = 'all',
 
     """
     if not text:
-        return ''
+        return ""
 
     # Palette Validation
     if custom_palette:
@@ -528,31 +590,37 @@ def colored_random(text: str, target: Literal['all', 'words', 'chars'] = 'all',
     attrs = _validate_attrs(attrs)
 
     # Break the text
-    if target == 'chars':
+    if target == "chars":
         broken_text: list = list(text)  # Into letters
-    elif target == 'words':
-        broken_text: list = text.split(' ')  # Into words
-    elif target == 'all':
+    elif target == "words":
+        broken_text: list = text.split(" ")  # Into words
+    elif target == "all":
         broken_text: list = [text]  # Whole text
     else:
         # Raise error
         raise ValueError("target must be 'chars', 'words' or 'all'")
 
-    colorized_items: list = ['']*len(broken_text)
+    colorized_items: list = [""] * len(broken_text)
     for i, chunk in enumerate(broken_text):
-        colorized_items[i] = _apply_random_colors(chunk, color_mode, custom_palette,
-                                                  attrs, random_attrs)
+        colorized_items[i] = _apply_random_colors(
+            chunk, color_mode, custom_palette, attrs, random_attrs
+        )
     # Join separator
-    sep = ''
-    if target == 'words':
-        sep = ' '
+    sep = ""
+    if target == "words":
+        sep = " "
 
     return sep.join(colorized_items)
 
 
-def _apply_random_colors(text: str, color_mode: ColorMode, custom_palette: Iterable,
-                         attrs: Iterable[Attribute], random_attrs: bool) -> str:
-    """ Apply random colors and/or attributes """
+def _apply_random_colors(
+    text: str,
+    color_mode: ColorMode,
+    custom_palette: Iterable,
+    attrs: Iterable[Attribute],
+    random_attrs: bool,
+) -> str:
+    """Apply random colors and/or attributes"""
     # Choose a random color or from palette
     if custom_palette is not None:
         color = choice(custom_palette)
@@ -567,7 +635,7 @@ def _apply_random_colors(text: str, color_mode: ColorMode, custom_palette: Itera
 
 
 def get_random_color(color_mode: int = 4) -> Union[str, RGBTuple]:
-    """ 
+    """
     ### Get Random Color
     Returns a random color from a colorsystem specified by `color_mode`.
 
@@ -605,7 +673,7 @@ def get_random_color(color_mode: int = 4) -> Union[str, RGBTuple]:
 
 
 def create_random_palette(color_mode: ColorMode, n: int) -> list:
-    """ 
+    """
     ### Create Palette
     Returns a list of colors from `color_mode`-bit color system.
 
@@ -622,7 +690,7 @@ def create_random_palette(color_mode: ColorMode, n: int) -> list:
 
 
 def de_ansi(text: str) -> str:
-    """ 
+    """
     ### De-Ansi
     Removes all ansi codes from `text`. It uses `ANSI_REGEX` pattern.
     Returns the `text` as is, If no ANSI sequences found.
@@ -634,7 +702,7 @@ def de_ansi(text: str) -> str:
     # Example
     >> # Ansi containting string
     >> ansi_string = colored("This is clean.", "red", "white", ["bold", "dark"])
-    >> 
+    >>
     >> de_ansi(ansi_string)
     'This is clean.'
     ```
@@ -649,11 +717,11 @@ def de_ansi(text: str) -> str:
     return ANSI_REGEX.sub("", text)
 
 
-def contains_ansi(text:str) -> bool:
-    """ 
+def contains_ansi(text: str) -> bool:
+    """
     ### Contains ansi
     Returns `True` if text contains ansi codes, else `False`.
-    
+
     #### Example:
     ```
     >> text = colored("Formatted String", fgcolor="red")
@@ -668,18 +736,21 @@ def contains_ansi(text:str) -> bool:
 
 
 def print_all_colors():
-    """ 
+    """
     ### Print All Colors
     Print all 256 colors with their name and code.
     (sorted by codes in asc. order)
     """
     for code, clr in sorted(zip(COLORS_256.values(), COLORS_256.keys())):
-        print(" ", colored("    ", bgcolor=clr, color_mode=8),
-              f"{colored(code, code, color_mode=8)}: {clr}")
+        print(
+            " ",
+            colored("    ", bgcolor=clr, color_mode=8),
+            f"{colored(code, code, color_mode=8)}: {clr}",
+        )
 
 
 def get_all_colors(sort_by_name: bool = False):
-    """ 
+    """
     ### Get All Colors
     Yields a `tuple` of `color_name` and it's `code`. (sorted by `code`)
 
@@ -712,7 +783,7 @@ def get_all_colors(sort_by_name: bool = False):
 
 
 def search_colors(query: str):
-    """ 
+    """
     ### Search [8-bit] Colors
     Yields all colors (`name`, `code`) that contain `query` in their name.
 
@@ -727,9 +798,13 @@ def search_colors(query: str):
             yield clr, code
 
 
-def make_ansi(fgcolor: Color = None, bgcolor: Color = None,
-              attrs: Iterable[Attribute] = None, color_mode=4) -> str:
-    """  
+def make_ansi(
+    fgcolor: Color = None,
+    bgcolor: Color = None,
+    attrs: Iterable[Attribute] = None,
+    color_mode=4,
+) -> str:
+    """
     ### Make Ansi
     Make an `Ansi Escape Sequence` from the args given.
     Returns the sequence without `Ansi Reset Code`.
@@ -769,8 +844,8 @@ def make_ansi(fgcolor: Color = None, bgcolor: Color = None,
     if bgcolor:
         bgcolor = _normalize_color(bgcolor, color_mode, True)
 
-    result = ''
-    fmt_str = ANSI_CODES[f'{color_mode}bit']
+    result = ""
+    fmt_str = ANSI_CODES[f"{color_mode}bit"]
 
     # Adding Colors
     if color_mode == 4:
@@ -797,7 +872,7 @@ def make_ansi(fgcolor: Color = None, bgcolor: Color = None,
     # Adding Attributes
     if attrs:
         for a in attrs:
-            result = ANSI_CODES['attr'] % (ATTRIBUTES[a], result)
+            result = ANSI_CODES["attr"] % (ATTRIBUTES[a], result)
 
     return result
 
@@ -805,11 +880,11 @@ def make_ansi(fgcolor: Color = None, bgcolor: Color = None,
 def _normalize_color(color: Color, color_mode: ColorMode, bg: bool = False) -> Color:
     """
     Normalize `color` to be used in ansi escape sequences.
-    Normalized colors are safe to use in ansi sequences 
+    Normalized colors are safe to use in ansi sequences
     without any additional validations.
 
     #### NOTE:
-    Caller is responsible for validating the colors. 
+    Caller is responsible for validating the colors.
     This method throws errors otherwise.
 
     #### ARGS:
@@ -831,7 +906,7 @@ def _normalize_color(color: Color, color_mode: ColorMode, bg: bool = False) -> C
 
 
 def _validate_colors(colors: tuple, color_mode: ColorMode) -> tuple:
-    """ 
+    """
     ### Validate Colors
     Validate the colors based on `color_mode`. returns the `colors` if all good.
 
@@ -843,7 +918,7 @@ def _validate_colors(colors: tuple, color_mode: ColorMode) -> tuple:
     >> fgcolor, bgcolor = 'light_red', None
     >> _validate_colors((fgcolor, bgcolor), color_mode=4)
     ('light_red', None)
-    >> 
+    >>
     >> _validate_colors(('light_red', 'invalid_color'), color_mode=8)
     InvalidColorError: Invalid 8-bit color: invalid_color
     ```
@@ -860,7 +935,7 @@ def _validate_colors(colors: tuple, color_mode: ColorMode) -> tuple:
 
 
 def _validate_attrs(attrs: list) -> list:
-    """ 
+    """
     ### Validate Attrs
     Validate the `attrs`. returns the `attrs` if all good.
 
@@ -868,7 +943,7 @@ def _validate_attrs(attrs: list) -> list:
     # Example
     >> _validate_attrs(['bold', 'italic'])
     ['bold', 'italic']
-    >> 
+    >>
     >> _validate_attrs(['underline', 'invalid_attr'])
     AttributeError: Invalid attribute: invalid_attr
     ```
@@ -886,7 +961,7 @@ def _validate_attrs(attrs: list) -> list:
 
 
 def _is_valid_colormode(color_mode: ColorMode) -> bool:
-    """ Validates colormode, Returns `True` if valid, `False` otherwise """
+    """Validates colormode, Returns `True` if valid, `False` otherwise"""
     if color_mode in (4, 8, 24):
         return True
     return False
@@ -909,9 +984,9 @@ def _is_color_8bit(color: Union[int, str]) -> bool:
 
 
 def is_valid_color(color: Color, color_mode: ColorMode) -> bool:
-    """ 
+    """
     ### Is Valid Color?
-    validates the color based on `color_mode`. Returns `True` if color 
+    validates the color based on `color_mode`. Returns `True` if color
     is valid, `False` for otherwise.
 
     #### ARGS:
@@ -929,7 +1004,7 @@ def is_valid_color(color: Color, color_mode: ColorMode) -> bool:
 
 
 def is_valid_rgb(rgb: RGBTuple) -> bool:
-    """ 
+    """
     ### Is valid rgb
     Returns `True` if `rgb` is valid rgb, else `False`.
     `rgb` must be a `tuple` not `list`, not `set` not anything else.
@@ -962,7 +1037,7 @@ def is_valid_rgb(rgb: RGBTuple) -> bool:
 
 
 def is_valid_hex(hexcode: str) -> bool:
-    """ 
+    """
     ### Is valid hex
     Returns `True` if `hexcode` is valid hex color code, else `False`.
 
@@ -980,7 +1055,7 @@ def is_valid_hex(hexcode: str) -> bool:
 
 
 def is_valid_attr(attr: str) -> bool:
-    """ 
+    """
     ### Is valid attr
     Returns `True` if `attr` is a valid Attribute, else `False`.
 
@@ -1006,7 +1081,7 @@ def is_valid_attr(attr: str) -> bool:
 
 
 def colorname_to_code(color: Color256) -> Union[int, None]:
-    """ 
+    """
     ### Colorname to Code
     Returns the `code` for the `color`.
     Returns `None` if color is not a valid 8-bit color.
@@ -1037,7 +1112,7 @@ def colorname_to_code(color: Color256) -> Union[int, None]:
 
 
 def code_to_colorname(color: int) -> Union[str, None]:
-    """ 
+    """
     ### Code to Colorname
     Returns the color name for the `color` code.
     Returns `None` if color is not a valid color. If `color` is already a valid
@@ -1075,9 +1150,9 @@ def code_to_colorname(color: int) -> Union[str, None]:
 
 
 def hex_to_rgb(hexcode: str) -> RGBTuple:
-    """ 
+    """
     ### Hex to RGB
-    Converts a `hex` color code into an `RGB tuple`. 
+    Converts a `hex` color code into an `RGB tuple`.
     It is case-insensitive and also recognizes 3-lettered hex
     color codes `e.g #FFF, #9ca etc.`
 
@@ -1108,16 +1183,16 @@ def hex_to_rgb(hexcode: str) -> RGBTuple:
 
     # Convert to 6-letter hex (if not already)
     if len(new_hex) == 3:
-        new_hex = "".join([l+l for l in new_hex])
+        new_hex = "".join([l + l for l in new_hex])
 
     # Convert the hex to RGB
-    return tuple(int(new_hex[i:i+2], 16) for i in (0, 2, 4))
+    return tuple(int(new_hex[i : i + 2], 16) for i in (0, 2, 4))
 
 
 def rgb_to_hex(rgb: RGBTuple, with_symbol: bool = True) -> str:
-    """ 
+    """
     ### RGB to Hex
-    Converts an `rgb` tuple into Hex color code. 
+    Converts an `rgb` tuple into Hex color code.
 
     #### ARGS:
     - `rgb`: RGB tuple to convert to hex
@@ -1141,9 +1216,9 @@ def rgb_to_hex(rgb: RGBTuple, with_symbol: bool = True) -> str:
     # Conversion...
     hexcode = "#" if with_symbol else ""
     for value in rgb:
-        h = format(value, 'X')  # Convert to hex
+        h = format(value, "X")  # Convert to hex
         if len(h) == 1:
-            h = '0' + h  # Add zero before the hex if length:1
+            h = "0" + h  # Add zero before the hex if length:1
         hexcode += h
 
     return hexcode
