@@ -5,7 +5,7 @@
 [![supported Python versions](https://img.shields.io/pypi/pyversions/ansy)](https://pypi.python.org/pypi/ansy)
 [![Project licence](https://img.shields.io/pypi/l/ansy?color=blue)](LICENSE) 
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](black) 
-[![Automated testing results](https://img.shields.io/github/actions/workflow/status/anas-shakeel/ansy/.github/workflows/python-package.yml?branch=main)](https://github.com/anas-shakeel/pinsy/actions/workflows/test.yml?query=branch%3Amain)
+[![Automated testing results](https://img.shields.io/github/actions/workflow/status/anas-shakeel/ansy/.github/workflows/python-package.yml?branch=main)](https://github.com/anas-shakeel/ansy/actions/workflows/python-package.yml?query=branch%3Amain)
 [![PyPI downloads](https://img.shields.io/pypi/dm/ansy.svg)](https://pypistats.org/packages/ansy)
 
 
