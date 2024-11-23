@@ -9,7 +9,7 @@ These Colors Include:
 
 from . import _corpus_colors
 from random import choice
-
+from typing import List, Dict
 
 def get_web_colors():
     """ 
@@ -46,7 +46,7 @@ def get_palettes():
         yield palette
 
 
-def get_random_palette() -> list[str]:
+def get_random_palette() -> List[str]:
     """ 
     ### Get Random Palette
     Returns a random color palette.
@@ -54,7 +54,7 @@ def get_random_palette() -> list[str]:
     return choice(_corpus_colors.palettes)
 
 
-def get_material_color(color: _corpus_colors.MaterialColor) -> dict:
+def get_material_color(color: _corpus_colors.MaterialColor) -> Dict:
     """ 
     ### Get Material Colors
     Returns a `dict` of a material `color` (all of its shades).
