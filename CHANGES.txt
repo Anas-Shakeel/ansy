@@ -1,3 +1,9 @@
+1.1.0 -- November 24, 2024
+
+* Updated README
+* Updated setup file
+* Added support for python 3.8
+
 1.0.2 -- October 17, 2024
 
 * Proper Attributions added in THIRD_PARTY_LICENSES
