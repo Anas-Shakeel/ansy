@@ -1,3 +1,7 @@
+1.1.2 -- November 24, 2024
+
+* Fix minor bugs in README links
+
 1.1.1 -- November 24, 2024
 
 * Fix minor bugs
