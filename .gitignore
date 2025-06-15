@@ -7,3 +7,6 @@ __pycache__/
 /examples/
 /MANIFEST.in
 /TODO.md
+
+# MkDocs build folder
+/site/
