@@ -1,0 +1,6 @@
+# Development Requirements
+black==25.1.0
+build==1.2.2.post1
+mkdocs==1.6.1
+mkdocs-material==9.6.14
+pytest==8.4.0
