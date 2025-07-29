@@ -1088,7 +1088,7 @@ def colorname_to_code(color: Color256) -> Union[int, None]:
     If `color` is already an 8-bit color code, returns the code.
 
     #### ARGS:
-    - `color_name`: name of a color (from 256 color system)
+    - `color`: name of a color (from 256 color system)
 
     ```
     # Example
@@ -1119,7 +1119,7 @@ def code_to_colorname(color: int) -> Union[str, None]:
     colorname, Returns the name.
 
     #### ARGS:
-    - `code`: code of a color (from 256 color system `i.e. [0-255]`)
+    - `color`: code of a color (from 256 color system `i.e. [0-255]`)
 
     ```
     # Example
