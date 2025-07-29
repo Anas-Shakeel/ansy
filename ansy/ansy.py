@@ -86,8 +86,8 @@ def colored(
     text: str,
     fgcolor: Color = None,
     bgcolor: Color = None,
-    attrs: Attribute = None,
-    color_mode: int = 4,
+    attrs: Iterable[Attribute] = None,
+    color_mode: ColorMode = 4,
     *,
     no_color: bool = None,
     force_color: bool = None,
@@ -143,7 +143,8 @@ def colored(
     - `attrs` contains an invalid attribute
 
     """
-    if not text:
+    # Boolean, None, or Empty string would return ""
+    if isinstance(text, bool) or text is None or text == "":
         return ""
 
     result = str(text)
@@ -162,8 +163,8 @@ def printc(
     text: str,
     fgcolor: Color = None,
     bgcolor: Color = None,
-    attrs: Attribute = None,
-    color_mode: int = 4,
+    attrs: Iterable[Attribute] = None,
+    color_mode: ColorMode = 4,
     *,
     sep=" ",
     end="\n",
@@ -295,7 +296,7 @@ def _parse_ansy(
 
 
 def create_style(
-    color_mode: int = 4,
+    color_mode: ColorMode = 4,
     fgcolor: Color = None,
     bgcolor: Color = None,
     attrs: Iterable[Attribute] = None,
@@ -523,7 +524,7 @@ def make_gradient(
 def colored_random(
     text: str,
     target: Literal["all", "words", "chars"] = "all",
-    color_mode: int = 4,
+    color_mode: ColorMode = 4,
     custom_palette: Iterable = None,
     attrs: Iterable[Attribute] = None,
     random_attrs: bool = False,
@@ -634,7 +635,7 @@ def _apply_random_colors(
     return colored(text, color, color_mode=color_mode, attrs=new_attrs)
 
 
-def get_random_color(color_mode: int = 4) -> Union[str, RGBTuple]:
+def get_random_color(color_mode: ColorMode = 4) -> Union[str, RGBTuple]:
     """
     ### Get Random Color
     Returns a random color from a colorsystem specified by `color_mode`.
@@ -934,7 +935,7 @@ def _validate_colors(colors: tuple, color_mode: ColorMode) -> tuple:
     return colors
 
 
-def _validate_attrs(attrs: list) -> list:
+def _validate_attrs(attrs: Iterable[Attribute]) -> list:
     """
     ### Validate Attrs
     Validate the `attrs`. returns the `attrs` if all good.
@@ -1054,7 +1055,7 @@ def is_valid_hex(hexcode: str) -> bool:
     return False
 
 
-def is_valid_attr(attr: str) -> bool:
+def is_valid_attr(attr: Attribute) -> bool:
     """
     ### Is valid attr
     Returns `True` if `attr` is a valid Attribute, else `False`.
