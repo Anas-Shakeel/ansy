@@ -5,13 +5,17 @@
 [![supported Python versions](https://img.shields.io/pypi/pyversions/ansy)](https://pypi.python.org/pypi/ansy)
 [![Project licence](https://img.shields.io/pypi/l/ansy?color=blue)](LICENSE) 
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](black) 
-[![Automated testing results](https://img.shields.io/github/actions/workflow/status/anas-shakeel/ansy/.github/workflows/python-package.yml?branch=main)](https://github.com/anas-shakeel/ansy/actions/workflows/python-package.yml?query=branch%3Amain)
+[![Automated testing results](https://img.shields.io/github/actions/workflow/status/anas-shakeel/ansy/.github/workflows/test.yml?branch=main)](https://github.com/anas-shakeel/ansy/actions/workflows/test.yml?query=branch%3Amain)
 [![PyPI downloads](https://static.pepy.tech/badge/ansy)](https://pypi.org/project/ansy/)
 
 
 `ansy` (pronounced __ANSI__), inspired by (& successor to) `termcolor` module that is used to style and format output in the terminal.
 
 It is was a part of another module i'v recently released called [Pinsy](https://pypi.org/project/pinsy), but i thought why not release it as it's own standalone module. So, Here it is.
+
+
+## Preview of Ansy in action
+![A preview of Ansy in action](images/demo.gif)
 
 
 ### ▎ Features

@@ -1,0 +1,72 @@
+site_name: Ansy
+site_description: A lightweight and elegant way to style terminal output with Python.
+site_author: Anas Shakeel
+repo_url: https://github.com/Anas-Shakeel/ansy
+repo_name: Anas-Shakeel/ansy
+
+theme:
+    name: material
+    features:
+        - navigation.instant
+        # - navigation.tabs
+        - content.code.copy
+        - content.code.annotate
+        - search.suggest
+        - search.highlight
+
+    palette:
+        - scheme: default
+          primary: blue
+          accent: blue
+          toggle:
+              icon: material/weather-night
+              name: Switch to dark mode
+        - scheme: slate
+          primary: blue
+          accent: blue
+          toggle:
+              icon: material/weather-sunny
+              name: Switch to light mode
+    icon:
+        repo: fontawesome/brands/github
+
+nav:
+    - Getting Started:
+          - Welcome to Ansy: index.md
+          - Installation: installation.md
+          - Usage: usage.md
+          - Useful To Know: useful-to-know.md
+    - API Reference:
+          - Ansy: api-reference/ansy.md
+          - Colors: api-reference/colors.md
+
+    - Examples: examples.md
+    - Project:
+          - Compatibility & Testing: compatibility.md
+          - Contributing: contributing.md
+          - Attributions: attributions.md
+          - License: license.md
+
+# Adding Github Link to footer
+extra:
+    social:
+        - icon: fontawesome/brands/github
+          link: https://github.com/Anas-Shakeel/ansy
+          name: GitHub
+
+# Enabling extensions
+markdown_extensions:
+    - toc:
+          permalink: True
+    - tables
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+    - pymdownx.extra
+    - pymdownx.highlight:
+          pygments_lang_class: true
+    - pymdownx.tabbed:
+          alternate_style: true
+
+plugins:
+    - search
