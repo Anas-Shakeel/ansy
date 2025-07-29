@@ -7,6 +7,8 @@ from pytest import raises
 
 
 def test_colored_basic():
+    assert ansy.colored(0, "blue", force_color=True) == "\x1b[34m0\x1b[0m"
+
     assert ansy.colored(None, "blue", force_color=True) == ""
     assert ansy.colored("", "blue", force_color=True) == ""
     assert ansy.colored(False, "blue", force_color=True) == ""
