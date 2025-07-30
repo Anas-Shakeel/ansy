@@ -17,7 +17,7 @@
 -   **Gradients**, **palettes**, and **random color** generation
 -   Cross-platform support _(Windows, Linux, macOS)_
 
-### Installation
+### 📦 Installation
 
 Ansy is available on **PyPI** and can be installed with `pip`.
 
@@ -35,7 +35,7 @@ pip install .
 
 You may also need to install `colorama` (_**Windows** users only_).
 
-### Quick Usage
+### 🚀 Quick Usage
 
 ```python
 from ansy import colored
@@ -59,7 +59,7 @@ Full documentation is available [here](https://anas-shakeel.github.io/ansy/)
 
 Contributions are welcome! Check out the [contributing guide](https://anas-shakeel.github.io/ansy/contributing/) to get started.
 
-### 💻 Compatibility and Testing
+### 💻 Compatibility
 
 This package has been well-tested across three major platforms (**Windows**, **MacOS**, and **Linux/ubuntu**).
 
