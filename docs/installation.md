@@ -8,6 +8,14 @@ pip install ansy
 
 This installs the latest version from [PyPI](https://pypi.org/project/ansy). If you've got **Python 3.8+** and `pip` installed, you're good to go. [See also](./compatibility.md)
 
+Or you can also install Ansy from source:
+
+```shell
+git clone https://github.com/anas-shakeel/ansy.git
+cd ansy
+pip install .
+```
+
 ## **Quick Check**
 
 To verify the installation, run `ansy` alone or with `-h` flag in the terminal:
