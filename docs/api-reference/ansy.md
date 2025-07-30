@@ -352,7 +352,7 @@ contains_ansi(text: str)
 Returns a random color from the selected color mode. Output may be a color name or an RGB tuple depending on the mode.
 
 ```python
-get_random_color(color_mode: int = 4)
+get_random_color(color_mode: ColorMode = 4)
 ```
 
 **Parameters:**
@@ -541,7 +541,7 @@ is_valid_color(color: Color, color_mode: ColorMode)
 Checks if the given attribute string is a valid ANSI text style attribute.
 
 ```python
-is_valid_attr(attr: str)
+is_valid_attr(attr: Attribute)
 ```
 
 **Parameters:**
