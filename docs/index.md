@@ -1,6 +1,6 @@
 # Ansy
 
-[![Automated testing results](https://img.shields.io/github/actions/workflow/status/anas-shakeel/ansy/.github/workflows/python-package.yml?branch=main)](https://github.com/anas-shakeel/ansy/actions/workflows/python-package.yml?query=branch%3Amain)
+[![Automated testing results](https://img.shields.io/github/actions/workflow/status/anas-shakeel/ansy/.github/workflows/test.yml?branch=main)](https://github.com/anas-shakeel/ansy/actions/workflows/test.yml?query=branch%3Amain)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Latest PyPi version](https://img.shields.io/pypi/v/ansy.svg)](https://pypi.python.org/pypi/ansy)
 [![PyPI downloads](https://static.pepy.tech/badge/ansy/month)](https://pypi.org/project/ansy/)<br/>
@@ -10,9 +10,6 @@
 `ansy` (_pronounced ANSI_) is a lightweight yet powerful Python library designed to supercharge your command-line output with vivid, expressive styling.
 
 Ansy helps you add colors and styles to your terminal output. It is made for developers who want their CLI apps to look clean, colorful, and easy to read without using heavy libraries or writing complex code.
-
-!!! note ""
-    Ansy was inspired by the [`termcolor`](https://github.com/termcolor/termcolor) module. Anything that **termcolor** can do, **ansy** can do it too... _and more!_
 
 ## **Why use Ansy?**
 
